@@ -40,7 +40,7 @@ public class TerrainDeJeu extends JPanel
         this.y = 200 ;
         
         this.timer = new Timer() ;
-        this.tache = new JeuTachePrincipale() ;
+        this.tache = new JeuTachePrincipale( this ) ;
         
         this.timer.schedule( this.tache, 1000, 500 );
         
@@ -50,12 +50,16 @@ public class TerrainDeJeu extends JPanel
     protected void paintComponent(Graphics g) 
     {
         Graphics2D g2d = (Graphics2D) g;
+        
+        g2d.setBackground( Color.WHITE ) ;
+        g2d.clearRect(0, 0, this.getWidth(), this.getHeight());
+        
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
         g2d.setColor(Color.RED);
         g2d.drawLine(10, 10, 300, 100);
         g2d.drawRect( 100, 100, 100, 50 ) ;
-        g2d.drawImage(img, this.x, this.y, this);
+        g2d.drawImage(img, this.x += 10, this.y, this);
 
 
         g2d.translate(50, 200);
