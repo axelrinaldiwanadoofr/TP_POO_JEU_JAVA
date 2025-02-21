@@ -16,7 +16,7 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 import java.awt.image.BufferedImage ;
-
+import java.util.Timer ;
 /**
  *
  * @author axel
@@ -38,6 +38,12 @@ public class TerrainDeJeu extends JPanel
         
         this.x = 200 ;
         this.y = 200 ;
+        
+        this.timer = new Timer() ;
+        this.tache = new JeuTachePrincipale() ;
+        
+        this.timer.schedule( this.tache, 1000, 500 );
+        
     }
     
     @Override
@@ -57,10 +63,12 @@ public class TerrainDeJeu extends JPanel
         g2d.drawImage(img, 0, 0, this);
         g2d.clip(new Rectangle(-110, 110, 80, 110));
         g2d.fill(new Rectangle(-100, 100, 100, 100));
-    }
-    
+    }   
     
     private BufferedImage img ;
     private int x ;
     private int y ;
+    
+    private Timer timer ;
+    private JeuTachePrincipale tache ;
 }
