@@ -25,7 +25,7 @@ public class TpJeu
         JFrame frame = new JFrame();
         frame.add( new TerrainDeJeu() ) ;
 
-        frame.setSize(600, 600);
+        frame.setSize(30+31*32, 23*32);
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
     }

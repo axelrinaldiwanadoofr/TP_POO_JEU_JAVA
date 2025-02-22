@@ -28,8 +28,16 @@ public class TerrainDeJeu extends JPanel
         
         this.laScene.ajoute( new AcSol( 100, 100 ));
         
-        for( int i=0; i<20; i++)
-            this.laScene.ajoute( new AcBalle( 10, 10+i*30, 3+i, 2, 0, 0 ));
+        // Dessine bord haut
+        for( int i=0; i<30; i++ )
+            this.laScene.ajoute( new AcBordHaut( 30+i*32, 10 ));
+        
+        // Dessine bords latéraux
+        for( int i=0; i<20; i++ )
+        {
+            this.laScene.ajoute( new AcBordGauche( 0, 40+i*32 ));
+            this.laScene.ajoute( new AcBordDroit( 28+30*32, 40+i*32 ));
+        }
         
         this.timer = new Timer() ;
         this.tache = new JeuTachePrincipale( this ) ;
