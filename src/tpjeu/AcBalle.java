@@ -28,5 +28,12 @@ public class AcBalle extends AcPhysique
         }
     }
     
+    @Override
+    public void onDraw( Graphics2D g2d, ImageObserver observer )
+    {
+        g2d.drawImage( AcBalle.image, (int)this.x, (int)this.y, observer ) ;
+    }
+    
+    
     protected static BufferedImage image ; 
 }

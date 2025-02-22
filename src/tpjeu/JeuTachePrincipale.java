@@ -20,7 +20,7 @@ public class JeuTachePrincipale extends TimerTask
     
     public void run()
     {
-        System.out.println( this.nb++ );
+        //System.out.println( this.nb++ );
         if( this.terrain.getScene().onTimer() )
         {
             this.terrain.repaint();

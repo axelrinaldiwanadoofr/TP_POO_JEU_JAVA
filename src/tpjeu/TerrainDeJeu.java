@@ -11,6 +11,11 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import javax.swing.JPanel;
 import java.util.Timer ;
+
+
+import java.awt.Rectangle;
+import java.awt.RenderingHints;
+
 /**
  *
  * @author axel
@@ -22,12 +27,14 @@ public class TerrainDeJeu extends JPanel
         this.laScene = new Scene() ;
         
         this.laScene.ajoute( new AcSol( 100, 100 ));
-        this.laScene.ajoute( new AcBalle( 10, 10, 1, 1, 0, 0 ));
+        
+        for( int i=0; i<20; i++)
+            this.laScene.ajoute( new AcBalle( 10, 10+i*30, 3+i, 2, 0, 0 ));
         
         this.timer = new Timer() ;
         this.tache = new JeuTachePrincipale( this ) ;
         
-        this.timer.schedule( this.tache, 1000, 200 );
+        this.timer.schedule( this.tache, 10, 20 );
         
     }
     
@@ -46,11 +53,12 @@ public class TerrainDeJeu extends JPanel
         
         this.laScene.onDraw(g2d, this);
         
+        
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
         g2d.setColor(Color.RED);
-        g2d.drawLine(10, 10, 300, 100);
-        g2d.drawRect( 100, 100, 100, 50 ) ;
+        //g2d.drawLine(10, 10, 300, 100);
+        //g2d.drawRect( 100, 100, 100, 50 ) ;
 
 
         g2d.translate(50, 200);
