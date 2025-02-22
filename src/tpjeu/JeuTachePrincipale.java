@@ -14,17 +14,19 @@ public class JeuTachePrincipale extends TimerTask
 {
     public JeuTachePrincipale( TerrainDeJeu terrain )
     {
-        this.nb = 0 ;
         this.terrain = terrain ;
     }
     
     public void run()
     {
-        System.out.println( this.nb++ ) ;
-        this.terrain.repaint();
+        if( this.terrain.getScene().onTimer() )
+        {
+            this.terrain.repaint();
+        }
+        
+        System.out.print( "!");
     }       
     
-    private int nb ;
     private TerrainDeJeu terrain ;
             
 }
