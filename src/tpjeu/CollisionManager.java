@@ -29,6 +29,26 @@ public class CollisionManager
         return false ;
     }
     
+    public void manageCollisionByTop( Scene laScene, Acteur acMobile, Acteur acCible, int numCible )
+    {
+        
+    }
+
+    public void manageCollisionByBottom( Scene laScene, Acteur acMobile, Acteur acCible, int numCible )
+    {
+        
+    }
+
+    public void manageCollisionByLeft( Scene laScene, Acteur acMobile, Acteur acCible, int numCible )
+    {
+        
+    }
+
+    public void manageCollisionByRight( Scene laScene, Acteur acMobile, Acteur acCible, int numCible )
+    {
+        
+    }
+    
     static public boolean isSuperClassOf( Class classe, Class parent )
     {
         if( classe == null ) return false ;
@@ -40,8 +60,8 @@ public class CollisionManager
     protected Class acteurCibleClass ;
     protected int collisionType ;
     
-    static public int ParLeHaut = 0x01 ;
-    static public int ParLeBas = 0x02 ;
-    static public int ParLaGauche = 0x04 ;
-    static public int ParLaDroite = 0x08 ;
+    static public int ByTop = 0x01 ;
+    static public int ByBottom = 0x02 ;
+    static public int ByLeft = 0x04 ;
+    static public int ByRight = 0x08 ;
 }

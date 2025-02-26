@@ -44,9 +44,9 @@ public class TerrainDeJeu extends JPanel
         AcBordHaut bh = new AcBordHaut( 30, 10 ) ;
         AcBordGauche bg = new AcBordGauche( 30, 10 ) ;
         
-        CollisionManager mgr = new CollisionManager( Acteur.class, AcBordHaut.class, CollisionManager.ParLeBas ) ;
+        CollisionManager mgr = new CollisionManager( Acteur.class, AcBordHaut.class, CollisionManager.ByBottom ) ;
                         
-        if( mgr.canManageCollision(balle, bh, CollisionManager.ParLeBas ) )
+        if( mgr.canManageCollision(balle, bh, CollisionManager.ByBottom ) )
         {
             System.out.println( "Collision ok" ) ;
         }
