@@ -25,9 +25,7 @@ public class TerrainDeJeu extends JPanel
     public TerrainDeJeu()
     {
         this.laScene = new Scene() ;
-        
-        this.laScene.ajoute( new AcSol( 100, 100 ));
-        
+                
         // Dessine bord haut
         for( int i=0; i<30; i++ )
             this.laScene.ajoute( new AcBordHaut( 30+i*32, 10 ));
@@ -37,6 +35,20 @@ public class TerrainDeJeu extends JPanel
         {
             this.laScene.ajoute( new AcBordGauche( 0, 40+i*32 ));
             this.laScene.ajoute( new AcBordDroit( 28+30*32, 40+i*32 ));
+        }
+        
+        // Balle
+        AcBalle balle = new AcBalle( 100, 500, 3, -2, 0, 0 ) ;
+        this.laScene.ajoute( balle );
+        
+        AcBordHaut bh = new AcBordHaut( 30, 10 ) ;
+        AcBordGauche bg = new AcBordGauche( 30, 10 ) ;
+        
+        CollisionManager mgr = new CollisionManager( Acteur.class, AcBordHaut.class, CollisionManager.ParLeBas ) ;
+                        
+        if( mgr.canManageCollision(balle, bh, CollisionManager.ParLeBas ) )
+        {
+            System.out.println( "Collision ok" ) ;
         }
         
         this.timer = new Timer() ;
