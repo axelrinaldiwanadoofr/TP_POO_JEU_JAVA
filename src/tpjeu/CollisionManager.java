@@ -60,8 +60,8 @@ public class CollisionManager
     protected Class acteurCibleClass ;
     protected int collisionType ;
     
-    static public int ByTop = 0x01 ;
-    static public int ByBottom = 0x02 ;
-    static public int ByLeft = 0x04 ;
-    static public int ByRight = 0x08 ;
+    final static public int ByTop = 0x01 ;
+    final static public int ByBottom = 0x02 ;
+    final static public int ByLeft = 0x04 ;
+    final static public int ByRight = 0x08 ;
 }

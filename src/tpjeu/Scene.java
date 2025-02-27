@@ -8,6 +8,7 @@ import java.awt.Graphics2D;
 import java.awt.image.ImageObserver;
 import java.util.LinkedList ;
 import java.util.ListIterator ;
+import java.util.ArrayList ;
 
 /**
  *
@@ -25,6 +26,11 @@ public class Scene
         this.acteurs.add( unActeur ) ;
     }
     
+    public void ajoute( CollisionManager cm )
+    {
+        this.collisionManagers.add( cm ) ;
+    }
+    
     public void onDraw( Graphics2D g2d, ImageObserver observer  )
     {
         ListIterator<Acteur> i = this.acteurs.listIterator() ;
@@ -39,5 +45,37 @@ public class Scene
         return changed ;
     }
     
+    public void manageCollision( Acteur acteurMobile, Acteur acteurCible, int collisionType, int cibleNum )
+    {
+        ListIterator<CollisionManager> i = this.collisionManagers.listIterator() ;
+
+        while( i.hasNext() ) 
+        {
+            CollisionManager cm = i.next() ;
+
+            if( cm.canManageCollision( acteurMobile, acteurCible, collisionType ) )
+            {
+                switch( collisionType )
+                {
+                    case CollisionManager.ByLeft:
+                        cm.manageCollisionByLeft( this, acteurMobile, acteurCible, cibleNum ) ;
+                        break ;
+                    case CollisionManager.ByRight:
+                        cm.manageCollisionByRight( this, acteurMobile, acteurCible, cibleNum ) ;
+                        break ;
+                    case CollisionManager.ByTop:
+                        cm.manageCollisionByTop( this, acteurMobile, acteurCible, cibleNum ) ;
+                        break ;
+                    case CollisionManager.ByBottom:
+                        cm.manageCollisionByBottom( this, acteurMobile, acteurCible, cibleNum ) ;
+                        break ;
+                }
+                //if( cm.stop ) return ;
+            }
+        }
+    }
+    
+    
     protected LinkedList<Acteur> acteurs ;
+    protected ArrayList<CollisionManager> collisionManagers ;
 }
