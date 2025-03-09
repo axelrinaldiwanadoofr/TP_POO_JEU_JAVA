@@ -14,7 +14,16 @@ import java.awt.image.ImageObserver ;
  */
 public class Acteur 
 {
-    public Acteur( float x, float y )
+    public Acteur()
+    {
+        this.x = 0.0f ;
+        this.y = 0.0f ;
+        this.width = 32.0f ;
+        this.height = 32.0f ;
+        this.doOnDraw = new DoDrawRectangle() ;
+    }
+    
+    public Acteur( float x, float y, String cheminFichierImage  )
     {
         this.x = x ;
         this.y = y ;
@@ -78,7 +87,7 @@ public class Acteur
         this.height = h ;
     }
     
-    public boolean isCollisionning( Acteur target )
+    public boolean isHitting( Acteur target )
     {
         if( target.x < this.x ) return false ;
         if( target.x > this.x + this.width ) return false ;
@@ -87,9 +96,9 @@ public class Acteur
         return true ;
     }
         
-    protected float x ;
-    protected float y ;
-    protected float width ;
-    protected float height ;
+    private float x ;
+    private float y ;
+    public float width ;
+    public float height ;
     protected OnDrawActeur doOnDraw ;
 }

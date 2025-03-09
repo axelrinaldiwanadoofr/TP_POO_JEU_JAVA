@@ -24,6 +24,15 @@ public class TerrainDeJeu extends JPanel
 {
     public TerrainDeJeu()
     {
+        super() ;
+        
+        Acteur a = new Acteur() ;
+        
+        System.out.println( "width: " + a.width );
+        
+        System.out.println( "x: " + a.getX() );
+        
+        
         this.laScene = new Scene() ;
                 
         // Dessine bord haut
@@ -44,9 +53,9 @@ public class TerrainDeJeu extends JPanel
         AcBordHaut bh = new AcBordHaut( 30, 10 ) ;
         AcBordGauche bg = new AcBordGauche( 30, 10 ) ;
         
-        CollisionManager mgr = new CollisionManager( Acteur.class, AcBordHaut.class, CollisionManager.ByBottom ) ;
+        HittingManager mgr = new HittingManager( Acteur.class, AcBordHaut.class, HittingManager.ByBottom ) ;
                         
-        if( mgr.canManageCollision(balle, bh, CollisionManager.ByBottom ) )
+        if( mgr.canManageCollision(balle, bh, HittingManager.ByBottom ) )
         {
             System.out.println( "Collision ok" ) ;
         }

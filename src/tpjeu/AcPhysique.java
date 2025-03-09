@@ -28,6 +28,26 @@ public class AcPhysique extends Acteur
         this.ay = ay ;
     }
     
+    public float getVx()
+    {
+        return this.vx ;
+    }
+
+    public float getVy()
+    {
+        return this.vy ;
+    }
+    
+    public void setVx( float v )
+    {
+        this.vx = v ;
+    }
+
+    public void setVy( float v )
+    {
+        this.vy = v ;
+    }
+    
     @Override
     public boolean onTimer( Scene laScene )
     {

@@ -26,7 +26,7 @@ public class Scene
         this.acteurs.add( unActeur ) ;
     }
     
-    public void ajoute( CollisionManager cm )
+    public void ajoute( HittingManager cm )
     {
         this.collisionManagers.add( cm ) ;
     }
@@ -45,28 +45,49 @@ public class Scene
         return changed ;
     }
     
+    public ArrayList<Acteur> whoIsCollisioningWith( Acteur unActeur )
+    {
+        ArrayList<Acteur> cibles = new ArrayList<Acteur>() ;
+
+        ListIterator<Acteur> i = this.acteurs.listIterator() ;
+        while( i.hasNext() )
+        {
+            Acteur cible = i.next() ;
+            
+            if( cible != unActeur )
+            {
+                if( unActeur.isCollisionning( cible ) )
+                {
+                    cibles.add( cible ) ;
+                }
+            }
+        }
+        return cibles ;
+    }
+    
+    
     public void manageCollision( Acteur acteurMobile, Acteur acteurCible, int collisionType, int cibleNum )
     {
-        ListIterator<CollisionManager> i = this.collisionManagers.listIterator() ;
+        ListIterator<HittingManager> i = this.collisionManagers.listIterator() ;
 
         while( i.hasNext() ) 
         {
-            CollisionManager cm = i.next() ;
+            HittingManager cm = i.next() ;
 
             if( cm.canManageCollision( acteurMobile, acteurCible, collisionType ) )
             {
                 switch( collisionType )
                 {
-                    case CollisionManager.ByLeft:
+                    case HittingManager.ByLeft:
                         cm.manageCollisionByLeft( this, acteurMobile, acteurCible, cibleNum ) ;
                         break ;
-                    case CollisionManager.ByRight:
+                    case HittingManager.ByRight:
                         cm.manageCollisionByRight( this, acteurMobile, acteurCible, cibleNum ) ;
                         break ;
-                    case CollisionManager.ByTop:
+                    case HittingManager.ByTop:
                         cm.manageCollisionByTop( this, acteurMobile, acteurCible, cibleNum ) ;
                         break ;
-                    case CollisionManager.ByBottom:
+                    case HittingManager.ByBottom:
                         cm.manageCollisionByBottom( this, acteurMobile, acteurCible, cibleNum ) ;
                         break ;
                 }
@@ -77,5 +98,5 @@ public class Scene
     
     
     protected LinkedList<Acteur> acteurs ;
-    protected ArrayList<CollisionManager> collisionManagers ;
+    protected ArrayList<HittingManager> collisionManagers ;
 }
