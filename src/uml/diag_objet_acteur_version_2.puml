@@ -1,0 +1,24 @@
+@startuml
+
+class AcMur {
+    static  + BufferedImage image
+}
+
+object AcMur_a1
+AcMur_a1 : x = 100
+AcMur_a1 : y = 100
+AcMur_a1 : width = 32
+AcMur_a1 : height = 32
+
+object AcMur_a2
+AcMur_a2 : x = 200
+AcMur_a2 : y = 100
+AcMur_a2 : width = 32
+AcMur_a2 : height = 32
+
+object BufferedImage
+
+AcMur --> "image" BufferedImage
+AcMur_a1  --> "image" BufferedImage
+AcMur_a2  --> "image" BufferedImage
+@enduml
