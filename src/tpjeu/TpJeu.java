@@ -20,16 +20,8 @@ public class TpJeu
      */
     public static void main(String[] args) 
     {
-        GameSceneryFactory scfc = null ;
-        
         TerrainDeJeu terrain = new TerrainDeJeu() ;
-        
-        //scfc = new GaScFcCasseBrique() ;
-        //scfc.buildGameScenery( terrain.getScene() );
-
-        scfc = new GaScFcMario2d() ;
-        scfc.buildGameScenery( terrain.getScene() );
-        
+                
         JFrame frame = new JFrame();
         frame.add( terrain ) ;
 

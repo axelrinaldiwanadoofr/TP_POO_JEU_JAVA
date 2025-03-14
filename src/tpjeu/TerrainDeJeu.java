@@ -16,34 +16,27 @@ import java.awt.event.MouseEvent ;
 import java.util.Timer ;
 
 
-import java.awt.Rectangle;
-import java.awt.RenderingHints;
-
 /**
  *
  * @author axel
  */
-public class TerrainDeJeu extends JPanel implements MouseMotionListener 
+public class TerrainDeJeu extends JPanel 
 {
     public TerrainDeJeu()
     {
         super() ;
-        
-        Acteur a = new Acteur() ;
-        
-        System.out.println( "width: " + a.width );
-        
-        System.out.println( "x: " + a.getX() );
-        
-        
+                
         this.laScene = new Scene() ;
-                                
-        this.timer = new Timer() ;
-        this.tache = new JeuTachePrincipale( this ) ;
         
-        this.timer.schedule( this.tache, 10, 20 );
+        float yO = 600.0f ;
+        float xO = 20.0f ;
         
-        addMouseMotionListener( this ) ;        
+        // Crée des sols
+        for( int i=0; i<20; i++ )
+        {
+            this.laScene.ajoute( new AcSol( xO+i*32, yO ));
+        }
+                                        
     }
     
     public Scene getScene()
@@ -59,38 +52,8 @@ public class TerrainDeJeu extends JPanel implements MouseMotionListener
         g2d.setBackground( Color.WHITE ) ;
         g2d.clearRect(0, 0, this.getWidth(), this.getHeight());
         
-        this.laScene.onDraw(g2d, this);
-        
-        /*
-        g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-
-        g2d.setColor(Color.RED);
-        //g2d.drawLine(10, 10, 300, 100);
-        //g2d.drawRect( 100, 100, 100, 50 ) ;
-
-
-        g2d.translate(50, 200);
-        g2d.rotate(Math.toRadians(30), getWidth() / 2.0, getHeight() / 2.0);
-        g2d.clip(new Rectangle(-110, 110, 80, 110));
-        g2d.fill(new Rectangle(-100, 100, 100, 100));
-        */
-        
-        
+        this.laScene.onDraw(g2d, this);        
     }   
-    
-    public void mouseMoved( MouseEvent e )
-    {
-        if( this.laScene.onMouseMoved( e.getX(), e.getY() ) )
-            this.repaint() ;
-    }
-
-    public void mouseDragged( MouseEvent e )
-    {
         
-    }
-    
     protected Scene laScene ;
-    
-    protected Timer timer ;
-    protected JeuTachePrincipale tache ;
 }
