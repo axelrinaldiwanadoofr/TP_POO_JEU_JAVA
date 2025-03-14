@@ -58,7 +58,6 @@ public class AcMouseMoved extends Acteur
     {
         this.vx = x - this.x ;
         this.vy = y - this.y ;
-        System.out.println( "v: " + this.vx + " " + this.vy );
         return super.moveTo( laScene, x, y) ;
     }
     

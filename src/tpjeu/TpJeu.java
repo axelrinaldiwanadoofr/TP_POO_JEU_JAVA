@@ -20,10 +20,13 @@ public class TpJeu
      */
     public static void main(String[] args) 
     {
-
+        TerrainDeJeu terrain = new TerrainDeJeu() ;
+        
+        GaScFcCasseBrique scfc = new GaScFcCasseBrique() ;
+        scfc.buildGameScenary( terrain.getScene() );
         
         JFrame frame = new JFrame();
-        frame.add( new TerrainDeJeu() ) ;
+        frame.add( terrain ) ;
 
         frame.setSize(30+31*32, 23*32);
         frame.setLocationRelativeTo(null);

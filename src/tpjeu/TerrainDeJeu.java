@@ -37,34 +37,7 @@ public class TerrainDeJeu extends JPanel implements MouseMotionListener
         
         
         this.laScene = new Scene() ;
-                
-        // Dessine bord haut
-        for( int i=0; i<30; i++ )
-            this.laScene.ajoute( new AcBordHaut( 30+i*32, 10 ));
-        
-        // Dessine bords latéraux
-        for( int i=0; i<20; i++ )
-        {
-            this.laScene.ajoute( new AcBordGauche( 0, 40+i*32 ));
-            this.laScene.ajoute( new AcBordDroit( 28+30*32, 40+i*32 ));
-        }
-        
-        // Balle
-        AcBalle balle = new AcBalle( 700, 700, 6, -4, 0, 0 ) ;
-        this.laScene.ajoute( balle );
-        
-        // Raquette
-        AcRaquette raquette = new AcRaquette( 28+15*32, 20*32 ) ;
-        raquette.setMoveOnX( 30, 28+30*32-raquette.getWidth() ) ;
-        raquette.setMoveOnY( 20*32-60, 20*32 );
-        this.laScene.ajoute( raquette );
-        
-        this.laScene.ajoute( new HmRebond( AcBalle.class, AcBordHaut.class, HittingManager.ByBottom ));
-        this.laScene.ajoute( new HmRebond( AcBalle.class, AcBordGauche.class, HittingManager.ByRight ));
-        this.laScene.ajoute( new HmRebond( AcBalle.class, AcBordDroit.class, HittingManager.ByLeft ));
-        this.laScene.ajoute( new HmRebond( AcBalle.class, AcRaquette.class, 
-                HittingManager.ByLeft | HittingManager.ByTop | HittingManager.ByRight ));
-                
+                                
         this.timer = new Timer() ;
         this.tache = new JeuTachePrincipale( this ) ;
         
