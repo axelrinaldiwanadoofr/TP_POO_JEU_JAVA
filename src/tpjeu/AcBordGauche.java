@@ -16,8 +16,8 @@ public class AcBordGauche extends Acteur
     public AcBordGauche( float x, float y )
     {
         super( x, y ) ;        
-        AcBordGauche.image = DoDrawImage.loadImage( AcBordGauche.image, "/media/axel/Data/java/TpJeu/images/bordleft.png") ;
-        this.doOnDraw = new DoDrawImage( this, AcBordGauche.image ) ;
+        AcBordGauche.image = Acteur.loadImage( AcBordGauche.image, "/media/axel/Data/java/TpJeu/images/bordleft.png") ;
+        this.setImage( AcBordGauche.image ) ;
     }
     
     

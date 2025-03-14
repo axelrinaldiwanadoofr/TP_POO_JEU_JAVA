@@ -16,8 +16,8 @@ public class AcBordHaut extends Acteur
     public AcBordHaut( float x, float y )
     {
         super( x, y ) ;        
-        AcBordHaut.image = DoDrawImage.loadImage( AcBordHaut.image, "/media/axel/Data/java/TpJeu/images/bordtop.png") ;
-        this.doOnDraw = new DoDrawImage( this, AcBordHaut.image ) ;
+        AcBordHaut.image = Acteur.loadImage( AcBordHaut.image, "/media/axel/Data/java/TpJeu/images/bordtop.png") ;
+        this.setImage( AcBordHaut.image ) ;
     }
     
     static BufferedImage image = null ;

@@ -5,7 +5,11 @@
 package tpjeu;
 
 import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
 import java.awt.image.ImageObserver ;
+import java.io.File;
+import java.io.IOException;
+import javax.imageio.ImageIO;
 
 
 /**
@@ -20,16 +24,16 @@ public class Acteur
         this.y = 0.0f ;
         this.width = 32.0f ;
         this.height = 32.0f ;
-        this.doOnDraw = new DoDrawRectangle() ;
+        this.image = null ;
     }
     
-    public Acteur( float x, float y, String cheminFichierImage  )
+    public Acteur( float x, float y )
     {
         this.x = x ;
         this.y = y ;
         this.width = 32.0f ;
         this.height = 32.0f ;
-        this.doOnDraw = new DoDrawRectangle() ;
+        this.image = null ;
     }
 
     public Acteur( float x, float y, float width, float height )
@@ -38,23 +42,46 @@ public class Acteur
         this.y = y ;
         this.width = width ;
         this.height = height ;
-        this.doOnDraw = new DoDrawRectangle() ;
+        this.image = null ;
+    }
+    
+    public void setImage( BufferedImage image )
+    {
+        if( image != null )
+        {
+            this.width = image.getWidth() ;
+            this.height = image.getHeight() ;
+            this.image = image ;
+        }
     }
     
     public void onDraw( Graphics2D g2d, ImageObserver observer )
     {
-        this.doOnDraw.onDraw( g2d, this, observer ) ;
+        if( this.image != null )
+        {
+            g2d.drawImage( this.image, (int)this.x, (int)this.y, observer) ;        
+        }
     }
     
     public boolean onTimer( Scene laScene )
     {
         return false ;
     }
-    
-    public void moveTo( float x, float y )
+
+    public boolean onMouseMoved( Scene laScene, float x, float y )
     {
-        this.x = x ;
-        this.y = y ;
+        return false ;
+    }
+    
+    public boolean moveTo( Scene laScene, float x, float y )
+    {
+        if( this.x != x || this.y != y )
+        {
+            this.x = x ;
+            this.y = y ;
+            return true ;
+        }
+        return false ;
     }
     
     public float getX() 
@@ -89,16 +116,37 @@ public class Acteur
     
     public boolean isHitting( Acteur target )
     {
-        if( target.x < this.x ) return false ;
+        if( target.x + target.width < this.x ) return false ;
         if( target.x > this.x + this.width ) return false ;
-        if( target.y < this.y ) return false ;
+        if( target.y + target.height < this.y ) return false ;
         if( target.y > this.y + this.height ) return false ;
         return true ;
     }
+    
+    public static BufferedImage loadImage( BufferedImage image, String filePath )
+    {
+        if( image == null )
+        {
+            // Charge une image
+            File fImage = new File( filePath ) ;
+            
+            try
+            {
+                return ImageIO.read( fImage );      
+            }
+            catch( IOException error )
+            {
+                System.out.println( "Acteur.loadImage: L'image ne peut être chargée: " + error.getMessage() + " -- " + fImage.getPath() );
+                return null ;
+            }
+        }
+        else return image ;
+    }
+    
         
-    private float x ;
-    private float y ;
-    public float width ;
-    public float height ;
-    protected OnDrawActeur doOnDraw ;
+    protected float x ;
+    protected float y ;
+    protected float width ;
+    protected float height ;
+    protected BufferedImage image ;
 }

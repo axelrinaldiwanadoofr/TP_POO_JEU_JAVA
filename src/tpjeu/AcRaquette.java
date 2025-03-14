@@ -6,19 +6,18 @@ package tpjeu;
 
 import java.awt.image.BufferedImage ;
 
-
 /**
  *
  * @author axel
  */
-public class AcSol extends Acteur 
+public class AcRaquette extends AcMouseMoved 
 {
-    public AcSol( float x, float y )
+    public AcRaquette( float x, float y )
     {
-        super( x, y ) ;        
-        AcSol.image = Acteur.loadImage( AcSol.image, "/media/axel/Data/java/TpJeu/images/sol.png") ;
+        super( x, y ) ;
+        AcRaquette.image = Acteur.loadImage(AcRaquette.image, "/media/axel/Data/java/TpJeu/images/raquette.png") ;
         this.setImage(image);
     }
-        
-    static BufferedImage image = null ;
+    
+    static protected BufferedImage image ;
 }

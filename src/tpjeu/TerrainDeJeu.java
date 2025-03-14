@@ -10,6 +10,9 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import javax.swing.JPanel;
+import java.awt.event.MouseListener ;
+import java.awt.event.MouseMotionListener ;
+import java.awt.event.MouseEvent ;
 import java.util.Timer ;
 
 
@@ -20,7 +23,7 @@ import java.awt.RenderingHints;
  *
  * @author axel
  */
-public class TerrainDeJeu extends JPanel 
+public class TerrainDeJeu extends JPanel implements MouseMotionListener 
 {
     public TerrainDeJeu()
     {
@@ -47,24 +50,27 @@ public class TerrainDeJeu extends JPanel
         }
         
         // Balle
-        AcBalle balle = new AcBalle( 100, 500, 3, -2, 0, 0 ) ;
+        AcBalle balle = new AcBalle( 700, 700, 6, -4, 0, 0 ) ;
         this.laScene.ajoute( balle );
         
-        AcBordHaut bh = new AcBordHaut( 30, 10 ) ;
-        AcBordGauche bg = new AcBordGauche( 30, 10 ) ;
+        // Raquette
+        AcRaquette raquette = new AcRaquette( 28+15*32, 20*32 ) ;
+        raquette.setMoveOnX( 30, 28+30*32-raquette.getWidth() ) ;
+        raquette.setMoveOnY( 20*32-60, 20*32 );
+        this.laScene.ajoute( raquette );
         
-        HittingManager mgr = new HittingManager( Acteur.class, AcBordHaut.class, HittingManager.ByBottom ) ;
-                        
-        if( mgr.canManageCollision(balle, bh, HittingManager.ByBottom ) )
-        {
-            System.out.println( "Collision ok" ) ;
-        }
-        
+        this.laScene.ajoute( new HmRebond( AcBalle.class, AcBordHaut.class, HittingManager.ByBottom ));
+        this.laScene.ajoute( new HmRebond( AcBalle.class, AcBordGauche.class, HittingManager.ByRight ));
+        this.laScene.ajoute( new HmRebond( AcBalle.class, AcBordDroit.class, HittingManager.ByLeft ));
+        this.laScene.ajoute( new HmRebond( AcBalle.class, AcRaquette.class, 
+                HittingManager.ByLeft | HittingManager.ByTop | HittingManager.ByRight ));
+                
         this.timer = new Timer() ;
         this.tache = new JeuTachePrincipale( this ) ;
         
         this.timer.schedule( this.tache, 10, 20 );
         
+        addMouseMotionListener( this ) ;        
     }
     
     public Scene getScene()
@@ -82,7 +88,7 @@ public class TerrainDeJeu extends JPanel
         
         this.laScene.onDraw(g2d, this);
         
-        
+        /*
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
         g2d.setColor(Color.RED);
@@ -94,9 +100,21 @@ public class TerrainDeJeu extends JPanel
         g2d.rotate(Math.toRadians(30), getWidth() / 2.0, getHeight() / 2.0);
         g2d.clip(new Rectangle(-110, 110, 80, 110));
         g2d.fill(new Rectangle(-100, 100, 100, 100));
+        */
         
         
     }   
+    
+    public void mouseMoved( MouseEvent e )
+    {
+        if( this.laScene.onMouseMoved( e.getX(), e.getY() ) )
+            this.repaint() ;
+    }
+
+    public void mouseDragged( MouseEvent e )
+    {
+        
+    }
     
     protected Scene laScene ;
     

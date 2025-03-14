@@ -4,6 +4,9 @@
  */
 package tpjeu;
 
+import java.util.ArrayList;
+import java.util.Iterator ;
+
 /**
  *
  * @author axel
@@ -52,13 +55,71 @@ public class AcPhysique extends Acteur
     public boolean onTimer( Scene laScene )
     {
         boolean changed = false ;
+        boolean acteurKilled = false ;
         
         if( this.vx != 0.0f || this.vy != 0.0f )
-        {
-            float x = this.x + this.vx ;
-            float y = this.y + this.vy ;
-            this.moveTo( x, y ) ;
-            changed = true ;
+        {            
+            // Test de collision sur un déplacement horizontal
+            this.x += this.vx ;
+            ArrayList<Acteur> cibles = laScene.whoIsHittingBy( this ) ;
+            this.x -= this.vx ;
+
+            // Traiter la ou les collisions éventuelles
+            if( !cibles.isEmpty() )
+            {
+                int cibleNum = 1 ;
+
+                Iterator<Acteur> i = cibles.iterator() ;
+                while( i.hasNext() ) 
+                {
+                    Acteur cible = i.next() ;
+
+                    if( cible.x > this.x )
+                    {                    
+                        acteurKilled = laScene.manageHitting( this, cible, HittingManager.ByLeft, cibleNum ) ;
+                    }
+                    else
+                    {
+                        acteurKilled = laScene.manageHitting( this, cible, HittingManager.ByRight, cibleNum ) ;
+                    }
+                    cibleNum++ ;
+                }
+            }
+
+            // Test de collision sur un déplacement vertical
+            this.y += this.vy ;
+            cibles = laScene.whoIsHittingBy( this ) ;
+            this.y -= this.vy ;
+
+            // Traiter la ou les collisions éventuelles
+            if( !cibles.isEmpty() )
+            {
+                int cibleNum = 1 ;
+
+                Iterator<Acteur> i = cibles.iterator() ;
+                while( i.hasNext() ) 
+                {
+                    Acteur cible = i.next() ;
+
+                    if( cible.y > this.y )
+                    {                    
+                        acteurKilled = laScene.manageHitting( this, cible, HittingManager.ByTop, cibleNum ) ;
+                    }
+                    else
+                    {
+                        acteurKilled = laScene.manageHitting( this, cible, HittingManager.ByBottom, cibleNum ) ;
+                    }
+                    cibleNum++ ;
+                }
+            }
+            
+            if( ! acteurKilled )
+            {
+                float x = this.getX() + this.vx ;
+                float y = this.getY() + this.vy ;
+                this.moveTo( laScene, x, y ) ;
+                changed = true ;
+            }
         }
         
         this.vx += this.ax ;

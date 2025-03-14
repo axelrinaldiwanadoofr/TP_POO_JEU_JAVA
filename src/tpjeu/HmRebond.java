@@ -8,50 +8,54 @@ package tpjeu;
  *
  * @author axel
  */
-public class CmRebond extends HittingManager 
+public class HmRebond extends HittingManager 
 {
-    CmRebond( Class acMobileClass, Class acCibleClass, int collisionType )
+    HmRebond( Class acMobileClass, Class acCibleClass, int hittingType )
     {
-        super( acMobileClass, acCibleClass, collisionType ) ;
+        super( acMobileClass, acCibleClass, hittingType ) ;
     }
     
     @Override
-    public void manageCollisionByTop( Scene laScene, Acteur acMobile, Acteur acCible, int numCible )
+    public boolean manageHittingByTop( Scene laScene, Acteur acMobile, Acteur acCible, int numCible )
     {
         if( acMobile instanceof AcPhysique )
         {
             AcPhysique acm = (AcPhysique)acMobile ;       
             if( numCible == 1 ) acm.setVy( -acm.getVy() ) ;
         }
+        return false ;
     }
 
     @Override
-    public void manageCollisionByBottom( Scene laScene, Acteur acMobile, Acteur acCible, int numCible )
+    public boolean manageHittingByBottom( Scene laScene, Acteur acMobile, Acteur acCible, int numCible )
     {
         if( acMobile instanceof AcPhysique )
         {
             AcPhysique acm = (AcPhysique)acMobile ;       
             if( numCible == 1 ) acm.setVy( -acm.getVy() ) ;
         }        
+        return false ;
     }
 
     @Override
-    public void manageCollisionByLeft( Scene laScene, Acteur acMobile, Acteur acCible, int numCible )
+    public boolean manageHittingByLeft( Scene laScene, Acteur acMobile, Acteur acCible, int numCible )
     {
         if( acMobile instanceof AcPhysique )
         {
             AcPhysique acm = (AcPhysique)acMobile ;       
             if( numCible == 1 ) acm.setVx( -acm.getVx() ) ;
         }
+        return false ;
     }
 
     @Override
-    public void manageCollisionByRight( Scene laScene, Acteur acMobile, Acteur acCible, int numCible )
+    public boolean manageHittingByRight( Scene laScene, Acteur acMobile, Acteur acCible, int numCible )
     {
         if( acMobile instanceof AcPhysique )
         {
             AcPhysique acm = (AcPhysique)acMobile ;       
             if( numCible == 1 ) acm.setVx( -acm.getVx() ) ;
         }        
+        return false ;
     }
 }

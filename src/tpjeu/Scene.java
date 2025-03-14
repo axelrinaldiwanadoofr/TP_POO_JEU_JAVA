@@ -19,6 +19,7 @@ public class Scene
     public Scene()
     {
         this.acteurs = new LinkedList<Acteur>() ;
+        this.hittingManagers = new ArrayList<HittingManager>() ;
     }
     
     public void ajoute( Acteur unActeur )
@@ -28,12 +29,13 @@ public class Scene
     
     public void ajoute( HittingManager cm )
     {
-        this.collisionManagers.add( cm ) ;
+        this.hittingManagers.add( cm ) ;
     }
     
     public void onDraw( Graphics2D g2d, ImageObserver observer  )
     {
         ListIterator<Acteur> i = this.acteurs.listIterator() ;
+        
         while( i.hasNext() ) i.next().onDraw( g2d, observer ) ;
     }
 
@@ -44,8 +46,16 @@ public class Scene
         while( i.hasNext() ) if( i.next().onTimer( this ) ) changed = true ;
         return changed ;
     }
+
+    public boolean onMouseMoved( int x, int y )
+    {
+        boolean changed = false ;
+        ListIterator<Acteur> i = this.acteurs.listIterator() ;
+        while( i.hasNext() ) if( i.next().onMouseMoved( this, x, y ) ) changed = true ;
+        return changed ;
+    }
     
-    public ArrayList<Acteur> whoIsCollisioningWith( Acteur unActeur )
+    public ArrayList<Acteur> whoIsHittingBy( Acteur unActeur )
     {
         ArrayList<Acteur> cibles = new ArrayList<Acteur>() ;
 
@@ -56,7 +66,7 @@ public class Scene
             
             if( cible != unActeur )
             {
-                if( unActeur.isCollisionning( cible ) )
+                if( unActeur.isHitting( cible ) )
                 {
                     cibles.add( cible ) ;
                 }
@@ -66,37 +76,43 @@ public class Scene
     }
     
     
-    public void manageCollision( Acteur acteurMobile, Acteur acteurCible, int collisionType, int cibleNum )
+    public boolean manageHitting( Acteur acteurMobile, Acteur acteurCible, int hittingType, int cibleNum )
     {
-        ListIterator<HittingManager> i = this.collisionManagers.listIterator() ;
+        boolean acteurMobileKilled = false ; 
+        ListIterator<HittingManager> i = this.hittingManagers.listIterator() ;
 
         while( i.hasNext() ) 
         {
             HittingManager cm = i.next() ;
 
-            if( cm.canManageCollision( acteurMobile, acteurCible, collisionType ) )
+            if( cm.canManageHitting( acteurMobile, acteurCible, hittingType ) )
             {
-                switch( collisionType )
+                switch( hittingType )
                 {
                     case HittingManager.ByLeft:
-                        cm.manageCollisionByLeft( this, acteurMobile, acteurCible, cibleNum ) ;
+                        if( cm.manageHittingByLeft( this, acteurMobile, acteurCible, cibleNum ) ) 
+                            acteurMobileKilled = true ;
                         break ;
                     case HittingManager.ByRight:
-                        cm.manageCollisionByRight( this, acteurMobile, acteurCible, cibleNum ) ;
+                        if( cm.manageHittingByRight(this, acteurMobile, acteurCible, cibleNum ) )
+                            acteurMobileKilled = true ;
                         break ;
                     case HittingManager.ByTop:
-                        cm.manageCollisionByTop( this, acteurMobile, acteurCible, cibleNum ) ;
+                        if( cm.manageHittingByTop(this, acteurMobile, acteurCible, cibleNum ) )
+                            acteurMobileKilled = true ;
                         break ;
                     case HittingManager.ByBottom:
-                        cm.manageCollisionByBottom( this, acteurMobile, acteurCible, cibleNum ) ;
+                        if( cm.manageHittingByBottom(this, acteurMobile, acteurCible, cibleNum ) )
+                            acteurMobileKilled = true ;
                         break ;
                 }
                 //if( cm.stop ) return ;
             }
         }
+        return acteurMobileKilled ;
     }
     
     
     protected LinkedList<Acteur> acteurs ;
-    protected ArrayList<HittingManager> collisionManagers ;
+    protected ArrayList<HittingManager> hittingManagers ;
 }

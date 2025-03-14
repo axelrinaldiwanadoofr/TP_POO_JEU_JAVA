@@ -15,8 +15,8 @@ public class AcBalle extends AcPhysique
     {
         super( x, y, vx, vy, ax, ay ) ;
         
-        AcBalle.image = DoDrawImage.loadImage( AcBalle.image, "/media/axel/Data/java/TpJeu/images/balleRouge.png" ) ;        
-        this.doOnDraw = new DoDrawImage( this, AcBalle.image ) ;
+        AcBalle.image = Acteur.loadImage( AcBalle.image, "/media/axel/Data/java/TpJeu/images/balleRouge.png" ) ;
+        this.setImage( image ) ;
     }
         
     protected static BufferedImage image ; 

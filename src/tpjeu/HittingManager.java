@@ -13,40 +13,40 @@ package tpjeu;
 public class HittingManager 
 {
     
-    public HittingManager( Class acteurMobileClass, Class acteurCibleClass, int collisionType )
+    public HittingManager( Class acteurMobileClass, Class acteurCibleClass, int hittingType )
     {
         this.acteurMobileClass = acteurMobileClass ;
         this.acteurCibleClass = acteurCibleClass ;
-        this.collisionType = collisionType ;
+        this.hittingType = hittingType ;
     }
     
-    public boolean canManageCollision( Acteur acteurMobile, Acteur acteurCible, int collisionType )
+    public boolean canManageHitting( Acteur acteurMobile, Acteur acteurCible, int hittingType )
     {
         if( !isSuperClassOf( acteurMobile.getClass(), this.acteurMobileClass) ) return false ;
         if( !isSuperClassOf( acteurCible.getClass(), this.acteurCibleClass) ) return false ;
-        int v = collisionType & this.collisionType ;
+        int v = hittingType & this.hittingType ;
         if( v > 0 ) return true ;
         return false ;
     }
     
-    public void manageCollisionByTop( Scene laScene, Acteur acMobile, Acteur acCible, int numCible )
+    public boolean manageHittingByTop( Scene laScene, Acteur acMobile, Acteur acCible, int numCible )
     {
-        
+        return false ;
     }
 
-    public void manageCollisionByBottom( Scene laScene, Acteur acMobile, Acteur acCible, int numCible )
+    public boolean manageHittingByBottom( Scene laScene, Acteur acMobile, Acteur acCible, int numCible )
     {
-        
+        return false ;
     }
 
-    public void manageCollisionByLeft( Scene laScene, Acteur acMobile, Acteur acCible, int numCible )
+    public boolean manageHittingByLeft( Scene laScene, Acteur acMobile, Acteur acCible, int numCible )
     {
-        
+        return false ;
     }
 
-    public void manageCollisionByRight( Scene laScene, Acteur acMobile, Acteur acCible, int numCible )
+    public boolean manageHittingByRight( Scene laScene, Acteur acMobile, Acteur acCible, int numCible )
     {
-        
+        return false ;
     }
     
     static public boolean isSuperClassOf( Class classe, Class parent )
@@ -58,7 +58,7 @@ public class HittingManager
     
     protected Class acteurMobileClass ;
     protected Class acteurCibleClass ;
-    protected int collisionType ;
+    protected int hittingType ;
     
     final static public int ByTop = 0x01 ;
     final static public int ByBottom = 0x02 ;
