@@ -15,7 +15,8 @@ public class GaScFcCasseBrique extends GameSceneryFactory
         
     }
     
-    public void buildGameScenary( Scene laScene )
+    @Override
+    public void buildGameScenery( Scene laScene )
     {
         // Dessine bord haut
         for( int i=0; i<30; i++ )

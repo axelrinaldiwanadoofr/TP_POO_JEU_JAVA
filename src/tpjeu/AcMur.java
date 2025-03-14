@@ -15,7 +15,7 @@ public class AcMur extends Acteur
     public AcMur( float x, float y )
     {
         super( x, y ) ;        
-        AcMur.image = Acteur.loadImage( AcMur.image, "/media/axel/Data/java/TpJeu/images/mur.png") ;
+        AcMur.image = Acteur.loadImage( AcMur.image, "/media/axel/Data/java/TpJeu/images/mur.bmp") ;
         this.setImage(image);
     }
 

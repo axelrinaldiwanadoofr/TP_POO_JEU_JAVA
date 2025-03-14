@@ -8,7 +8,7 @@ package tpjeu;
  *
  * @author axel
  */
-public class GameSceneryFactory implements IGameSceneryFactory 
+public class GameSceneryFactory 
 {
     public GameSceneryFactory()
     {
