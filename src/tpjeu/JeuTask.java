@@ -10,9 +10,9 @@ import java.util.TimerTask;
  *
  * @author axel
  */
-public class JeuTachePrincipale extends TimerTask 
+public class JeuTask extends TimerTask 
 {
-    public JeuTachePrincipale( TerrainDeJeu terrain )
+    public JeuTask( TerrainDeJeu terrain )
     {
         this.terrain = terrain ;
         this.nb = 0 ;

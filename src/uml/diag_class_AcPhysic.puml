@@ -1,0 +1,33 @@
+@startuml
+
+
+class Acteur {
+    #float x
+    #float y
+    #float width
+    #float height
+
+    +void onDraw( Graphics2D g2d, ImageObserver observer )
+    +boolean onTimer( Scene laScene )
+}
+
+class AcPhysic {
+    #float vx
+    #float vy
+    #float ax
+    #float ay
+
+    +AcPhysic( float x, float y, float vx, float vy )
+    +AcPhysic( float x, float y, float vx, float vy, float ax, float ay )
+    +boolean onTimer( Scene laScene )
+}
+
+class AcBalle{
+    +AcBalle( float x, float y, float vx, float vy, float ax, float ay )
+}
+
+
+Acteur <|-- AcPhysic
+AcPhysic <|-- AcBalle
+
+@enduml

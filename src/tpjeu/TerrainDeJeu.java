@@ -39,9 +39,9 @@ public class TerrainDeJeu extends JPanel implements MouseMotionListener
         this.laScene = new Scene() ;
                                 
         this.timer = new Timer() ;
-        this.tache = new JeuTachePrincipale( this ) ;
+        this.threadJeu = new JeuTask( this ) ;
         
-        this.timer.schedule( this.tache, 10, 20 );
+        this.timer.schedule( this.threadJeu, 10, 20 );
         
         addMouseMotionListener( this ) ;        
     }
@@ -92,5 +92,5 @@ public class TerrainDeJeu extends JPanel implements MouseMotionListener
     protected Scene laScene ;
     
     protected Timer timer ;
-    protected JeuTachePrincipale tache ;
+    protected JeuTask threadJeu ;
 }
