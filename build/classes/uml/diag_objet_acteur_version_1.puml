@@ -1,0 +1,19 @@
+@startuml
+object Acteur_a1
+Acteur_a1 : x = 100
+Acteur_a1 : y = 100
+Acteur_a1 : width = 32
+Acteur_a1 : height = 32
+
+object Acteur_a2
+Acteur_a2 : x = 200
+Acteur_a2 : y = 100
+Acteur_a2 : width = 32
+Acteur_a2 : height = 32
+
+object BufferedImage_i1
+object BufferedImage_i2
+
+Acteur_a1  --> "image" BufferedImage_i1
+Acteur_a2  --> "image" BufferedImage_i2
+@enduml
