@@ -1,0 +1,37 @@
+@startuml
+
+interface Runnable {
+    {abstract} +void run()
+}
+
+class OS {
+}
+
+class TimerTask {
+    +void run()
+}
+
+class TerrainDeJeu {
+}
+
+class JeuTask {
+    +void run()
+}
+
+class Timer{
+    +schedule( TimerTask ts, delay int, periode int)
+}
+
+Runnable <-- "utilise" OS
+
+TimerTask <|-- JeuTask
+
+Runnable <|.. "implement" TimerTask
+
+TerrainDeJeu --> "timer" Timer
+TerrainDeJeu --> "jeuTask" JeuTask
+Timer --> TimerTask
+
+
+
+@enduml

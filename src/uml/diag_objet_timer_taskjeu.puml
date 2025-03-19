@@ -1,0 +1,11 @@
+@startuml
+
+object TerrainDeJeu
+
+object JeuTask
+
+object Timer
+
+TerrainDeJeu --> "timer" Timer
+TerrainDeJeu --> "jeuTask" JeuTask
+@enduml

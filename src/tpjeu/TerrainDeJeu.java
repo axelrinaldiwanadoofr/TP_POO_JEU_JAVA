@@ -10,10 +10,6 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import javax.swing.JPanel;
-import java.awt.event.MouseListener ;
-import java.awt.event.MouseMotionListener ;
-import java.awt.event.MouseEvent ;
-import java.util.Timer ;
 
 
 /**
@@ -27,16 +23,9 @@ public class TerrainDeJeu extends JPanel
         super() ;
                 
         this.laScene = new Scene() ;
-        
-        float yO = 600.0f ;
-        float xO = 20.0f ;
-        
-        // Crée des sols
-        for( int i=0; i<20; i++ )
-        {
-            this.laScene.ajoute( new AcSol( xO+i*32, yO ));
-        }
-                                        
+
+        this.laScene.ajoute( new AcSol( 100, 100 ));
+        this.laScene.ajoute( new AcMur( 200, 100 ));                                   
     }
     
     public Scene getScene()
