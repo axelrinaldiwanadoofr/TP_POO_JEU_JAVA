@@ -8,6 +8,7 @@ import java.awt.Graphics2D;
 import java.awt.image.ImageObserver;
 import java.util.LinkedList ;
 import java.util.ListIterator ;
+import java.util.ArrayList ;
 
 /**
  *
@@ -32,5 +33,13 @@ public class Scene
         while( i.hasNext() ) i.next().onDraw( g2d, observer ) ;
     }
 
+    public boolean onTimer()
+    {
+        boolean changed = false ;
+        ListIterator<Acteur> i = this.acteurs.listIterator() ;
+        while( i.hasNext() ) if( i.next().onTimer( this ) ) changed = true ;
+        return changed ;
+    }    
+    
     protected LinkedList<Acteur> acteurs ;
 }
