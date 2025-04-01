@@ -18,14 +18,14 @@ loop pour tous les acteurs
     laScene --> acteur: onDraw
     activate acteur
 
-    acteur --> laScene
+    acteur -->> laScene
     deactivate acteur
 end
 
-laScene --> terrain_de_jeu
+laScene -->> terrain_de_jeu
 deactivate laScene
 
-terrain_de_jeu --> windows
+terrain_de_jeu -->> windows
 deactivate terrain_de_jeu
 
 @endum
