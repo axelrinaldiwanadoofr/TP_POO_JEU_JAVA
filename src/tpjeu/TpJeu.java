@@ -19,7 +19,7 @@ public class TpJeu
      * @param args the command line arguments
      */
     public static void main(String[] args) 
-    {
+    {        
         TerrainDeJeu terrain = new TerrainDeJeu() ;
                 
         JFrame frame = new JFrame();
