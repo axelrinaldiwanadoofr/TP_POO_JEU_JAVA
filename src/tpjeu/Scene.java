@@ -25,6 +25,12 @@ public class Scene
     {
         this.acteurs.add( unActeur ) ;
     }
+    
+    public void remove( Acteur unActeur )
+    {
+        int index = this.acteurs.indexOf( unActeur ) ;
+        if( index >= 0 ) this.acteurs.remove(index) ;
+    }
         
     public void onDraw( Graphics2D g2d, ImageObserver observer  )
     {
