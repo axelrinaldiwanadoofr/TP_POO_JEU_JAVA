@@ -1,37 +1,31 @@
 @startuml
+actor Utilisateur as utilisateur
+queue Windows as windows
+participant TerrainDeJeu as terrain_de_jeu
+collections Scene as laScene
+participant Acteur as acteur
 
-interface Runnable {
-    {abstract} +void run()
-}
+utilisateur --> windows: retaille fenêtre
+activate windows
 
-class OS {
-}
+windows --> terrain_de_jeu: paintComponent
+activate terrain_de_jeu
 
-class TimerTask {
-    +void run()
-}
+terrain_de_jeu --> laScene: onDraw
+activate laScene
 
-class TerrainDeJeu {
-}
+loop pour tous les acteurs
+    laScene --> acteur: onDraw
+    activate acteur
 
-class JeuTask {
-    +void run()
-}
+    acteur --> laScene
+    deactivate acteur
+end
 
-class Timer{
-    +schedule( TimerTask ts, delay int, periode int)
-}
+laScene --> terrain_de_jeu
+deactivate laScene
 
-Runnable <-- "utilise" OS
+terrain_de_jeu --> windows
+deactivate terrain_de_jeu
 
-TimerTask <|-- JeuTask
-
-Runnable <|.. "implement" TimerTask
-
-TerrainDeJeu --> "timer" Timer
-TerrainDeJeu --> "jeuTask" JeuTask
-Timer --> TimerTask
-
-
-
-@enduml
+@endum

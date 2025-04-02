@@ -16,7 +16,7 @@ public class AcSol extends Acteur
     public AcSol( float x, float y )
     {
         super( x, y ) ;        
-        AcSol.image = Acteur.loadImage( AcSol.image, "/media/axel/Data/java/TpJeu/images/sol.png") ;
+        AcSol.image = Acteur.loadImage( AcSol.image, "images/sol.png") ;
         this.setImage(image);
     }
         
