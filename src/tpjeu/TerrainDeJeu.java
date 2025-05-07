@@ -10,22 +10,33 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import javax.swing.JPanel;
-
+import java.util.Timer ;
 
 /**
  *
  * @author axel
  */
-public class TerrainDeJeu extends JPanel 
+public class TerrainDeJeu extends JPanel
 {
     public TerrainDeJeu()
     {
         super() ;
                 
         this.laScene = new Scene() ;
-
-        this.laScene.ajoute( new AcSol( 100, 100 ));
-        this.laScene.ajoute( new AcMur( 200, 100 ));                                   
+        
+        // Ligne de sol
+        for( int i=0; i<40; i++ )
+        {
+            this.laScene.ajoute( new AcSol( 10.0f+i*32.0f, 632.0f )) ;
+        }
+        
+        // Ajoute une balle
+        this.laScene.ajoute( new AcBalle( 10.0f, 600.0f, 3.0f, -8.0f, 0.0f, 0.1f ));
+                                
+        this.timer = new Timer() ;
+        this.threadJeu = new JeuTask( this ) ;
+        
+        this.timer.schedule( this.threadJeu, 10, 20 );        
     }
     
     public Scene getScene()
@@ -41,8 +52,13 @@ public class TerrainDeJeu extends JPanel
         g2d.setBackground( Color.WHITE ) ;
         g2d.clearRect(0, 0, this.getWidth(), this.getHeight());
         
-        this.laScene.onDraw(g2d, this);        
+        this.laScene.onDraw(g2d, this);
+                
+        
     }   
         
     protected Scene laScene ;
+    
+    protected Timer timer ;
+    protected JeuTask threadJeu ;
 }

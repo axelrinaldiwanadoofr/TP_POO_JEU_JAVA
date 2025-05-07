@@ -19,7 +19,7 @@ public class TpJeu
      * @param args the command line arguments
      */
     public static void main(String[] args) 
-    {
+    {        
         TerrainDeJeu terrain = new TerrainDeJeu() ;
                 
         JFrame frame = new JFrame();
@@ -28,6 +28,7 @@ public class TpJeu
         frame.setSize(30+31*32, 23*32);
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
+        
     }
 
 }

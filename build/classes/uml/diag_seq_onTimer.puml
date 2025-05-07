@@ -1,0 +1,60 @@
+@startuml
+actor Utilisateur as utilisateur
+queue Windows as windows
+participant Timer as timer
+participant JeuTask as jeutask
+participant TerrainDeJeu as terrain_de_jeu
+collections Scene as laScene
+participant Acteur as acteur
+
+timer --> jeutask: run
+activate jeutask
+
+== onTimer ==
+
+jeutask --> laScene: onTimer
+activate laScene
+
+loop pour tous les acteurs
+    laScene --> acteur: onTimer
+    activate acteur
+
+    acteur -->> laScene
+    deactivate acteur
+end
+alt scène non modifié
+    laScene -->> jeutask: false
+else scène modifiée
+    laScene -->> jeutask: true
+end
+
+alt scène modifiée
+    jeutask --> windows: repaint
+    activate windows
+end
+
+deactivate jeutask
+
+== raffarichit la scène ==
+
+windows --> terrain_de_jeu: paintComponent
+activate terrain_de_jeu
+
+terrain_de_jeu --> laScene: onDraw
+activate laScene
+
+loop pour tous les acteurs
+    laScene --> acteur: onDraw
+    activate acteur
+
+    acteur -->> laScene
+    deactivate acteur
+end
+
+laScene -->> terrain_de_jeu
+deactivate laScene
+
+terrain_de_jeu -->> windows
+deactivate terrain_de_jeu
+
+@endum

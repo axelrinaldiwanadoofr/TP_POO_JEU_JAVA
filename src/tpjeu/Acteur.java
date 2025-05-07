@@ -67,11 +67,6 @@ public class Acteur
     {
         return false ;
     }
-
-    public boolean onMouseMoved( Scene laScene, float x, float y )
-    {
-        return false ;
-    }
     
     public boolean moveTo( Scene laScene, float x, float y )
     {
@@ -114,15 +109,15 @@ public class Acteur
         this.height = h ;
     }
     
-    public boolean isHitting( Acteur target )
-    {
-        if( target.x + target.width < this.x ) return false ;
-        if( target.x > this.x + this.width ) return false ;
-        if( target.y + target.height < this.y ) return false ;
-        if( target.y > this.y + this.height ) return false ;
-        return true ;
+    boolean collideWith(Acteur cible){
+        if (this.x + this.width < cible.x) return false;
+        if (this.y + this.height < cible.y) return false;
+        if (this.x > cible.x + cible.width) return false;
+        if (this.y > cible.y + cible.height) return false;
+        
+        return true;
     }
-    
+        
     public static BufferedImage loadImage( BufferedImage image, String filePath )
     {
         if( image == null )

@@ -8,6 +8,13 @@
             <file>file:/D:/AxelRinaldi/java/TP_POO_JEU_JAVA/src/tpjeu/TerrainDeJeu.java</file>
             <file>file:/D:/AxelRinaldi/java/TP_POO_JEU_JAVA/src/uml/diag_class_TerrainDeJeu_Timer.puml</file>
             <file>file:/D:/AxelRinaldi/java/TP_POO_JEU_JAVA/src/uml/diag_seq_onDraw.puml</file>
+            <file>file:/D:/AxelRinaldi/java/TP_POO_JEU_JAVA/src/uml/diag_seq_onTimer.puml</file>
+            <file>file:/D:/AxelRinaldi/java/TP_POO_JEU_JAVA/src/uml/diag_seq_onDraw_demarrage_jeu.puml</file>
+            <file>file:/D:/AxelRinaldi/java/TP_POO_JEU_JAVA/src/tpjeu/JeuTask.java</file>
+            <file>file:/D:/AxelRinaldi/java/TP_POO_JEU_JAVA/src/tpjeu/TpJeu.java</file>
+            <file>file:/D:/AxelRinaldi/java/TP_POO_JEU_JAVA/src/tpjeu/AcBalle.java</file>
+            <file>file:/D:/AxelRinaldi/java/TP_POO_JEU_JAVA/src/tpjeu/Acteur.java</file>
+            <file>file:/D:/AxelRinaldi/java/TP_POO_JEU_JAVA/src/tpjeu/Scene.java</file>
         </group>
     </open-files>
 </project-private>

@@ -8,6 +8,7 @@ import java.awt.Graphics2D;
 import java.awt.image.ImageObserver;
 import java.util.LinkedList ;
 import java.util.ListIterator ;
+import java.util.ArrayList ;
 
 /**
  *
@@ -18,11 +19,23 @@ public class Scene
     public Scene()
     {
         this.acteurs = new LinkedList<Acteur>() ;
+        this.collideManagers = new ArrayList<CollideManager>() ;
     }
     
     public void ajoute( Acteur unActeur )
     {
         this.acteurs.add( unActeur ) ;
+    }
+    
+    public void remove( Acteur unActeur )
+    {
+        int index = this.acteurs.indexOf( unActeur ) ;
+        if( index >= 0 ) this.acteurs.remove(index) ;
+    }
+    
+    public void ajoute( CollideManager cm )
+    {
+        this.collideManagers.add( cm ) ;
     }
         
     public void onDraw( Graphics2D g2d, ImageObserver observer  )
@@ -32,5 +45,30 @@ public class Scene
         while( i.hasNext() ) i.next().onDraw( g2d, observer ) ;
     }
 
+    public boolean onTimer()
+    {
+        boolean changed = false ;
+        ListIterator<Acteur> i = this.acteurs.listIterator() ;
+        while( i.hasNext() ) if( i.next().onTimer( this ) ) changed = true ;
+        return changed ;
+    }    
+    
+    public ArrayList<Acteur> whichCollideWith( Acteur unActeur )
+    {
+        ArrayList<Acteur> liste = new ArrayList<Acteur>();
+        ListIterator<Acteur> i = this.acteurs.listIterator() ;
+        while( i.hasNext() )
+        {
+            Acteur cible = i.next() ;
+            
+            if(cible.collideWith(unActeur) && unActeur != cible)
+            {
+                liste.add( cible );
+            }
+        }
+        return liste;
+    }
+    
     protected LinkedList<Acteur> acteurs ;
+    protected ArrayList<CollideManager> collideManagers ;
 }
