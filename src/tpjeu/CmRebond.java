@@ -8,18 +8,19 @@ package tpjeu;
  *
  * @author arinaldi7
  */
-public class CollideManager 
+public class CmRebond extends CollideManager
 {
-    public CollideManager( int collideType )
+    public CmRebond( int collideType )
     {
-        this.collideType = collideType ;
+        super( collideType ) ;
     }
     
     // Renvoie true si le gestionnaire de collision est capable
     // de gérer la collision
+    @Override
     public boolean canManageCollide( Acteur mobile, Acteur cible, int collideType )
     {
-        return true ;
+        return mobile instanceof AcBalle ;
     }
     
     public boolean manageCollideByTop( Scene laScene, Acteur mobile, Acteur cible, int numCible )

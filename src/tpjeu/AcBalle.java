@@ -19,22 +19,6 @@ public class AcBalle extends AcPhysique
         AcBalle.image = Acteur.loadImage( AcBalle.image, "images/balleRouge.png" ) ;
         this.setImage( image ) ;
     }
-    
-    @Override
-    public boolean onTimer( Scene laScene )
-    {
-        super.onTimer( laScene ) ;
-     
-        ArrayList<Acteur> list = laScene.whichCollideWith(this) ;
-        
-        if( !list.isEmpty() )
-        {
-            System.out.println( "collision" );
-        }
-                
-        
-        return true ;
-    }
         
     protected static BufferedImage image ; 
 }

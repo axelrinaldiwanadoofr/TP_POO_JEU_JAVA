@@ -24,6 +24,12 @@ public class TerrainDeJeu extends JPanel
                 
         this.laScene = new Scene() ;
         
+        this.laScene.ajoute( new CollideManager( 
+                CollideManager.ByLeft 
+                | CollideManager.ByRight
+                | CollideManager.ByTop
+                | CollideManager.ByBottom ) );
+        
         // Ligne de sol
         for( int i=0; i<40; i++ )
         {

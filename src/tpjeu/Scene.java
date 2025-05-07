@@ -69,6 +69,46 @@ public class Scene
         return liste;
     }
     
+    public boolean manageCollide( Acteur mobile, ArrayList<Acteur> cibles, int collideType )
+    {
+        // On parcours tous acteurs qui ont été collisionnés
+        int numCible = 0 ;
+        ListIterator<Acteur> i = cibles.listIterator() ;
+        while( i.hasNext() )
+        {
+            Acteur cible = i.next() ;
+            
+            // On recherche le gestionnaire de collision capable de traiter la collision
+            ListIterator<CollideManager> cmi = this.collideManagers.listIterator() ;
+            while( cmi.hasNext() )
+            {
+                CollideManager cm = cmi.next() ;
+                
+                // On vérifie que le gestionnaire de collision est capable de gérer la collision
+                if( cm.canManageCollide(mobile, cible, collideType) )
+                {
+                    switch( collideType )
+                    {
+                        case CollideManager.ByLeft -> {
+                            return cm.manageCollideByLeft(this, mobile, cible, numCible) ;
+                        }
+                        case CollideManager.ByRight -> {
+                            return cm.manageCollideByRight(this, mobile, cible, numCible) ;
+                        }
+                        case CollideManager.ByTop -> {
+                            return cm.manageCollideByTop(this, mobile, cible, numCible) ;
+                        }
+                        case CollideManager.ByBottom -> {
+                            return cm.manageCollideByBottom(this, mobile, cible, numCible) ;
+                        }
+                    }
+                }
+            }
+            numCible++ ;
+        }
+        return false ;
+    }        
+    
     protected LinkedList<Acteur> acteurs ;
     protected ArrayList<CollideManager> collideManagers ;
 }
